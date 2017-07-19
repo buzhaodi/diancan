@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <v-header></v-header>
+        <v-header :seller="seller"></v-header>
 
         <div class="tab">
             <div class="tab-item">
@@ -26,15 +26,17 @@
   export default {
     data () {
       return {
-        seller: {}
+        seller: {
+          avatar: '454654'
+        }
       }
     },
     created () {
       this.axios.get('/api/seller').then((response) => {
         if (response.data.errno === 0) {
-          console.log('成功')
+          console.log(response.data)
+          this.seller = response.data.data
         }
-        console.log(response.data)
       })
     },
     components: {
