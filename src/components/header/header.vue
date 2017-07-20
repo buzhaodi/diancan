@@ -3,21 +3,26 @@
     <div class="header">
         <div class="content-wrapper">
             <div class="avatar">
+                <!--头部图片-->
                 <img width="64" height="64" :src="seller.avatar">
             </div>
             <div class="content">
+                <!--商家名字-->
                 <div class="title">
                     <span class="brand"></span>
                     <span class="name">{{seller.name}}</span>
                 </div>
+                <!--配送描述-->
                 <div class="description">
                     {{seller.description}}/{{seller.deliveryTime}}
                 </div>
+                <!--第一个活动-->
                 <div v-if="seller.supports" class="support">
                     <span class="icon" :class="classMap[seller.supports[0].type]"></span>
                     <span class="text">{{seller.supports[0].description}}</span>
                 </div>
             </div>
+            <!--右边活动个数-->
             <div v-if="seller.supports" class="support-count" @click="detailshow=!detailshow">
                 <span class="count">{{seller.supports.length}}个</span>
 
@@ -28,21 +33,30 @@
         <div class="bullein-wrapper" @click="detailshow=!detailshow">
             <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
         </div>
-
+      <!--头部背景-->
         <div class="background">
             <img :src="seller.avatar" width="100%" height="100%">
         </div>
-
+        <!--商家详情页弹框-->
         <div v-show="detailshow" class="detail">
             <div class="detail-wrapper clearfix">
                 <div class="detail-mian">
-                {{seller}}
-
-
+                    <h1 class="name">{{seller.name}}</h1>
+                    <!--评分-->
+                    <div  class="star-wrapper">
+                    <star :size="48"  :score="seller.score"></star>
+                    </div>
                 </div>
             </div>
-            <div class="detail-close"  @click="detailshow=!detailshow" >
-                <svg  t="1500525976872" class="icon-close" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2414"><path d="M162.510592 224.380744l61.86318-61.86318 637.101895 637.101895-61.86318 61.86318-637.101895-637.101895Z" p-id="2415"></path><path d="M799.619052 162.510592l61.86318 61.86318-637.101895 637.101895-61.86318-61.86318 637.101895-637.101895Z" p-id="2416"></path></svg>
+            <div class="detail-close" @click="detailshow=!detailshow">
+                <svg t="1500525976872" class="icon-close"
+                     style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                     viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2414">
+                    <path d="M162.510592 224.380744l61.86318-61.86318 637.101895 637.101895-61.86318 61.86318-637.101895-637.101895Z"
+                          p-id="2415"></path>
+                    <path d="M799.619052 162.510592l61.86318 61.86318-637.101895 637.101895-61.86318-61.86318 637.101895-637.101895Z"
+                          p-id="2416"></path>
+                </svg>
             </div>
         </div>
     </div>
@@ -50,12 +64,12 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+  import star from '../star/star.vue'
   export default {
-    name: 'Hi',
+    name: 'header',
     data () {
       return {
-        msg: 'Welcome to 111',
         detailshow: false
       }
     },
@@ -70,6 +84,9 @@
       show () {
         this.detailshow = true
       }
+    },
+    components: {
+      star
     }
   }
 </script>
@@ -192,11 +209,21 @@
             background rgba(7, 17, 27, 0.8)
             overflow auto
         .detail-wrapper
-           min-height 100%
-          .detail-mian
-             margin-top 64px
-             padding-bottom 64px
-             word-break break-all
+            width 100%
+            min-height 100%
+        .detail-mian
+            margin-top 64px
+            padding-bottom 64px
+            word-break break-all
+            .name
+                line-height 16px
+                text-align center
+                font-size 16px
+                font-weight 700
+             .star-wrapper
+                margin-top 18px
+                padding 2px 0
+                text-align center
         .detail-close
             position relative
             width 32px
