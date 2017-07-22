@@ -15,14 +15,15 @@
             </div>
 
         </div>
-        <transition name="fade" mode="out-in">
-            <router-view></router-view>
+        <transition name="fade">
+            <router-view :seller="seller"></router-view>
         </transition>
     </div>
 </template>
 
 <script>
   import header from '@/components/header/header.vue'
+
   export default {
     data () {
       return {
@@ -47,6 +48,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
     @import "common/stylus/index.styl"
+    @import "common/icon.styl"
     #app
         .tab
             display flex
@@ -65,9 +67,11 @@
                 color rgb(240, 20, 20)
 
     .fade-enter-active, .fade-leave-active
-        transition: opacity .2s
+        transition opacity .2s
+
 
     .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */
         opacity: 0
+
 
 </style>
