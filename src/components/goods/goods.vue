@@ -20,7 +20,7 @@
                         {{item.name}}
                     </h1>
                     <ul>
-                        <li v-for="food in item.foods" class="food-item border-1px">
+                        <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
                             <div class="icon">
                                 <img width="57px" height="57px" :src="food.icon">
                             </div>
@@ -44,15 +44,17 @@
             </ul>
         </div>
         <shopcart :selectFoods="selecetFoods" :can-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+
+        <food :food="selectedFood"></food>
+
     </div>
-
-
 </template>
 
 <script type="text/ecmascript-6">
   import BScroll from '../../../node_modules/better-scroll'
   import shopcart from '../shopcart/shopcart.vue'
   import cartcontrol from '../cartcontroll/cartcontroll.vue'
+  import food from '../food/food.vue'
 
   export default {
     name: 'goods',
@@ -63,7 +65,8 @@
         goods: [],
         classMap: [],
         ListHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
       }
     },
     props: {
@@ -117,6 +120,13 @@
         let el = foodList[index]
         this.foodsScroll.scrollToElement(el, 300)
         console.log(index)
+      },
+      selectFood (food, event) {
+        if (!event._constructed) {
+          return
+        }
+
+        this.selectedFood = food
       }
     },
     computed: {
@@ -144,7 +154,8 @@
     },
     components: {
       shopcart,
-      cartcontrol
+      cartcontrol,
+      food
     }
 
   }
