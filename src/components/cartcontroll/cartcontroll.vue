@@ -20,6 +20,7 @@
 </template>
 
 <script>
+//      加减号组件
   import Vue from 'vue'
   export default {
     name: 'cartcontroll',

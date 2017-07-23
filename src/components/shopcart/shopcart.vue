@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="content-right">
+            <div class="content-right" @click.stop.prevent="pay">
                 <div class="pay" :class="payClass">
                     {{payDesc}}
                 </div>
@@ -51,15 +51,15 @@
             </div>
         </transition>
         <transition name="fade">
-        <div v-if="listShow" class="list-mask" ></div>
+            <div v-if="listShow" class="list-mask"></div>
         </transition>
     </div>
-
 
 
 </template>
 
 <script>
+  //    购物车组件
   import BScroll from '../../../node_modules/better-scroll'
   import cartcontroll from '../cartcontroll/cartcontroll'
 
@@ -99,6 +99,13 @@
         this.selectFoods.forEach((food) => {
           food.count = 0
         })
+      },
+      pay () {
+        if (this.totalPrice < this.minPrice) {
+          return
+        }
+        alert('买买买 还没写')
+        console.log(this.selectFoods)
       }
     },
     computed: {
@@ -165,7 +172,7 @@
         position fixed
         left 0
         bottom 0
-        z-index 500
+        z-index 99
         width 100%
         height 48px
         .content
@@ -314,7 +321,8 @@
         height 100%
         z-index -50
         backdrop-filter blur(10px)
-        background rgba(7,17,27,0.6)
+        background rgba(7, 17, 27, 0.6)
+
     .fold-enter-active, .fold-leave-active
         transition opacity .2s
 
