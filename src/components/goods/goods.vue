@@ -20,8 +20,8 @@
                         {{item.name}}
                     </h1>
                     <ul>
-                        <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
-                            <div class="icon">
+                        <li v-for="food in item.foods" class="food-item border-1px">
+                            <div class="icon" @click="selectFood(food,$event)">
                                 <img width="57px" height="57px" :src="food.icon">
                             </div>
                             <div class="content">
@@ -43,9 +43,9 @@
                 </li>
             </ul>
         </div>
-        <shopcart :selectFoods="selecetFoods" :can-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+        <shopcart :select-Type="selectType" :selectFoods="selecetFoods" :can-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
 
-        <food :food="selectedFood"></food>
+        <food :food="selectedFood" ref="seleFood"></food>
 
     </div>
 </template>
@@ -55,7 +55,7 @@
   import shopcart from '../shopcart/shopcart.vue'
   import cartcontrol from '../cartcontroll/cartcontroll.vue'
   import food from '../food/food.vue'
-
+  import split from '../split/split.vue'
   export default {
     name: 'goods',
     data () {
@@ -66,7 +66,8 @@
         classMap: [],
         ListHeight: [],
         scrollY: 0,
-        selectedFood: {}
+        selectedFood: {},
+        selectType: 2
       }
     },
     props: {
@@ -127,6 +128,7 @@
         }
 
         this.selectedFood = food
+        this.$refs['seleFood'].show()
       }
     },
     computed: {
@@ -155,7 +157,8 @@
     components: {
       shopcart,
       cartcontrol,
-      food
+      food,
+      split
     }
 
   }
