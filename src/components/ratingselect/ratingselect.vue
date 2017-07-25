@@ -56,14 +56,14 @@
           return
         }
         this.selectType = type
-        this.$emit('select', type)
+        this.$emit('select', this.selectType)
       },
       toggleContent (event) {
         if (!event._constructed) {
           return
         }
         this.onlyContent = !this.onlyContent
-        this.$emit('toggle')
+        this.$emit('toggle', this.onlyContent)
       }
     },
     computed: {
