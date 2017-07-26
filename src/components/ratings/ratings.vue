@@ -41,7 +41,7 @@
                                 <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}</span>
                                 <p class="text">{{rating.text}}</p>
                                 <div class="recommend" v-show="rating.recommend.length">{{rating.recommend}}
-                                    <span class="icon-thumb_up"></span>
+                                    <span :class="{'icon-thumb_up':rating.rateType==0,'icon-thumb_down':rating.rateType==1}"></span>
                                     <span class="item" v-for="item in rating.recommend">{{item}}</span>
                                 </div>
                             </div>
@@ -64,6 +64,7 @@
   import ratingselect from '../ratingselect/ratingselect.vue'
   import { formatDate } from '../../common/js/date'
   import BScroll from '../../../node_modules/better-scroll'
+  import { urlParse } from '@/common/js/until.js'
   const ALL = 2
   export default {
     name: 'ratings',
@@ -92,7 +93,8 @@
           click: true
         })
       })
-      this.axios.get('/api/ratings').then((response) => {
+      let queryParam = urlParse()
+      this.axios.get('/api/ratings/?id=' + queryParam.id).then((response) => {
         if (response.data.errno === 0) {
           this.ratings = response.data.data
           this.$nextTick(() => {
@@ -248,12 +250,14 @@
                 .recommend
                     line-height 16px
                     font-size 0
-                    .icon-thumnb_up, .item
+                    .icon-thumb_up, .item, .icon-thumb_down
                         display inline-block
                         margin 0 8px 4px 0
                         font-size 9px
-                    .icon-thumnb_up
+                    .icon-thumb_up
                         color rgb(0, 160, 220)
+                    .icon-thumb_down
+                        color #93999f
                     .item
                         padding 0 6px
                         border 1px solid rgba(7, 17, 27, 0.1)

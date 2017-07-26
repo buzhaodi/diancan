@@ -21,7 +21,7 @@
                     </h1>
                     <ul>
                         <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
-                            <div class="icon" >
+                            <div class="icon">
                                 <img width="57px" height="57px" :src="food.icon">
                             </div>
                             <div class="content">
@@ -43,7 +43,8 @@
                 </li>
             </ul>
         </div>
-        <shopcart :select-Type="selectType" :selectFoods="selecetFoods" :can-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+        <shopcart :select-Type="selectType" :selectFoods="selecetFoods" :can-price="seller.deliveryPrice"
+                  :min-price="seller.minPrice"></shopcart>
 
         <food :food="selectedFood" ref="seleFood"></food>
 
@@ -56,6 +57,7 @@
   import cartcontrol from '../cartcontroll/cartcontroll.vue'
   import food from '../food/food.vue'
   import split from '../split/split.vue'
+  import { urlParse } from '@/common/js/until.js'
   export default {
     name: 'goods',
     data () {
@@ -77,7 +79,10 @@
     },
     created () {
       this.classMap = ['decreas', 'discount', 'special', 'invoice', 'guarantee']
-      this.axios.get('/api/goods').then((response) => {
+
+      let queryParam = urlParse()
+
+      this.axios.get('/api/goods?id=' + queryParam.id).then((response) => {
         if (response.data.errno === 0) {
           this.goods = response.data.data
           // dom从新更新 $nextTick就是方法

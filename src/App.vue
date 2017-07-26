@@ -16,22 +16,30 @@
 
         </div>
         <transition name="fade">
+            <keep-alive>
             <router-view :seller="seller"></router-view>
+            </keep-alive>
         </transition>
     </div>
 </template>
 
 <script>
   import header from '@/components/header/header.vue'
+  import {urlParse} from '@/common/js/until.js'
 
   export default {
     data () {
       return {
-        seller: {}
+        seller: {
+          id: (() => {
+            let queryParam = urlParse()
+            return queryParam.id
+          })()
+        }
       }
     },
     created () {
-      this.axios.get('/api/seller').then((response) => {
+      this.axios.get('/api/seller?id=' + this.seller.id).then((response) => {
         if (response.data.errno === 0) {
           this.seller = response.data.data
         }
@@ -68,7 +76,6 @@
 
     .fade-enter-active, .fade-leave-active
         transition opacity .2s
-
 
     .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */
         opacity: 0
