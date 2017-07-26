@@ -17,7 +17,7 @@
         </div>
         <transition name="fade">
             <keep-alive>
-            <router-view :seller="seller"></router-view>
+                <router-view :seller="seller"></router-view>
             </keep-alive>
         </transition>
     </div>
@@ -25,7 +25,7 @@
 
 <script>
   import header from '@/components/header/header.vue'
-  import {urlParse} from '@/common/js/until.js'
+  import { urlParse } from '@/common/js/until.js'
 
   export default {
     data () {
@@ -34,12 +34,16 @@
           id: (() => {
             let queryParam = urlParse()
             return queryParam.id
+          })(),
+          tableNumber: (() => {
+            let queryParam = urlParse()
+            return queryParam.tableNumber
           })()
         }
       }
     },
     created () {
-      this.axios.get('/api/seller?id=' + this.seller.id).then((response) => {
+      this.axios.get('/api/seller?id=' + this.seller.id + '&tableNumber=' + this.seller.tableNumber).then((response) => {
         if (response.data.errno === 0) {
           this.seller = response.data.data
         }

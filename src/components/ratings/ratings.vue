@@ -94,7 +94,7 @@
         })
       })
       let queryParam = urlParse()
-      this.axios.get('/api/ratings/?id=' + queryParam.id).then((response) => {
+      this.axios.get('/api/ratings/?id=' + queryParam.id + '&tableNumber=' + queryParam.tableNumber).then((response) => {
         if (response.data.errno === 0) {
           this.ratings = response.data.data
           this.$nextTick(() => {

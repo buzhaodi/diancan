@@ -82,7 +82,7 @@
 
       let queryParam = urlParse()
 
-      this.axios.get('/api/goods?id=' + queryParam.id).then((response) => {
+      this.axios.get('/api/goods?id=' + queryParam.id + '&tableNumber=' + queryParam.tableNumber).then((response) => {
         if (response.data.errno === 0) {
           this.goods = response.data.data
           // dom从新更新 $nextTick就是方法
