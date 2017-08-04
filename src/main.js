@@ -7,8 +7,10 @@ import axios from '../node_modules/axios'
 import VueAxios from '../node_modules/vue-axios'
 
 Vue.use(VueAxios, axios, router)
-
+axios.defaults.withCredentials = true
 Vue.config.productionTip = false
+// 定义跟网站常量
+Vue.prototype.SERVERDOMIAN = 'http://192.168.1.91:999'
 
 /* eslint-disable no-new */
 new Vue({

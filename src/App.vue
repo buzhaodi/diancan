@@ -43,7 +43,7 @@
       }
     },
     created () {
-      this.axios.get('/api/seller?id=' + this.seller.id + '&tableNumber=' + this.seller.tableNumber).then((response) => {
+      this.axios.get(this.SERVERDOMIAN + '/fapi/seller?id=' + this.seller.id + '&tableNumber=' + this.seller.tableNumber).then((response) => {
         if (response.data.errno === 0) {
           this.seller = response.data.data
         }
