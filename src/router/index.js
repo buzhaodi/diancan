@@ -7,6 +7,8 @@ import goods from '@/components/goods/goods'
 import ratings from '@/components/ratings/ratings'
 // 商家组件
 import seller from '@/components/seller/seller'
+// 结算组件
+import settleaccounts from '@/components/settleaccounts/settleaccounts'
 
 Vue.use(Router)
 
@@ -31,6 +33,12 @@ export default new Router({
     {
       path: '/seller',
       component: seller
+    },
+    // 结算页
+    {
+      name: 'settleaccounts',
+      path: '/settleaccounts',
+      component: settleaccounts
     }
   ]
 })

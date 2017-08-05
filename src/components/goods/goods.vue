@@ -7,7 +7,7 @@
                 <li v-for="(item , $index) in goods" class="menu-item" :class="{'current' :currentIndex===$index}"
                     @click="selectMenu($index,$event)">
                     <span class="text border-1px">
-                       <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span> {{item.name}}
+                       <span v-show="item.type>=0" class="icon" :class="classMap[item.type]"></span> {{item.name}}
                     </span>
                 </li>
             </ul>
@@ -82,7 +82,7 @@
 
       let queryParam = urlParse()
 
-      this.axios.get('/api/goods?id=' + queryParam.id + '&tableNumber=' + queryParam.tableNumber).then((response) => {
+      this.axios.get(this.SERVERDOMIAN + '/fapi/goods?id=' + queryParam.id + '&tableNumber=' + queryParam.tableNumber).then((response) => {
         if (response.data.errno === 0) {
           this.goods = response.data.data
           // dom从新更新 $nextTick就是方法

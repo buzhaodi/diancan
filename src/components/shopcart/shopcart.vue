@@ -104,8 +104,12 @@
         if (this.totalPrice < this.minPrice) {
           return
         }
-        alert('买买买 还没写')
-        console.log(this.selectFoods)
+        let temppay = []
+        this.selectFoods.forEach((data) => {
+          let temp = {id: data.id, count: data.count}
+          temppay.push(temp)
+        })
+        this.$router.push({name: 'settleaccounts', params: temppay})
       }
     },
     computed: {
