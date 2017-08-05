@@ -76,5 +76,6 @@
         width 100%
         bottom 46px
         overflow hidden
-
+        .header
+            position absolute
 </style>
